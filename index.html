@@ -182,20 +182,76 @@
                     <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
                         <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
                             <svg viewBox="0 0 600 400" class="w-full h-44 md:h-60 geo-svg">
-                                <rect width="600" height="400" fill="transparent"/>
-                                <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-                                    <line x1="100" y1="110" x2="500" y2="110"/>
-                                    <line x1="100" y1="170" x2="500" y2="170"/>
-                                    <line x1="100" y1="230" x2="500" y2="230"/>
-                                    <line x1="100" y1="290" x2="500" y2="290"/>
-                                    <line x1="180" y1="110" x2="180" y2="290"/>
-                                    <line x1="300" y1="110" x2="300" y2="290"/>
-                                    <line x1="420" y1="110" x2="420" y2="290"/>
-                                    <circle cx="300" cy="200" r="70"/>
-                                    <circle cx="300" cy="200" r="45"/>
-                                    <circle cx="300" cy="200" r="20"/>
-                                </g>
-                            </svg>
+  <defs>
+    <!-- 定义一个可复用的光晕滤镜 -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="600" height="400" fill="transparent"/>
+  <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
+    <!-- 基础网格线 -->
+    <line x1="100" y1="110" x2="500" y2="110"/>
+    <line x1="100" y1="170" x2="500" y2="170"/>
+    <line x1="100" y1="230" x2="500" y2="230"/>
+    <line x1="100" y1="290" x2="500" y2="290"/>
+    <line x1="180" y1="110" x2="180" y2="290"/>
+    <line x1="300" y1="110" x2="300" y2="290"/>
+    <line x1="420" y1="110" x2="420" y2="290"/>
+    
+    <!-- 动态外圈 -->
+    <circle cx="300" cy="200" r="70" filter="url(#glow)">
+      <animate
+        attributeName="r"
+        values="70;72;70"
+        dur="8s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="stroke-opacity"
+        values="0.4;0.8;0.4"
+        dur="8s"
+        repeatCount="indefinite"
+      />
+    </circle>
+    
+    <!-- 动态中圈 -->
+    <circle cx="300" cy="200" r="45">
+      <animate
+        attributeName="r"
+        values="45;47;45"
+        dur="6s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="stroke-dasharray"
+        values="1 1.5; 1.5 1; 1 1.5"
+        dur="4s"
+        repeatCount="indefinite"
+      />
+    </circle>
+    
+    <!-- 动态内圈 -->
+    <circle cx="300" cy="200" r="20">
+      <animate
+        attributeName="r"
+        values="20;22;20"
+        dur="4s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="stroke"
+        values="#8c8c89;#1f1f1e;#8c8c89"
+        dur="4s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </g>
+</svg>
                         </div>
                         <div class="flex-1 flex flex-col justify-center w-full">
                             <div class="flex items-center gap-5 mb-4">
