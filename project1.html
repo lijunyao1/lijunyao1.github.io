@@ -316,22 +316,67 @@
                     <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
                         以下为完整研究报告（PDF），仅支持浏览，禁止复制/下载
                     </p>
-                    <!-- PDF展示容器（替换为你的PDF文件路径，建议放在GitHub Pages的assets目录） -->
-                    <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
-                        <object 
-                            data="assets/fed-monetary-policy-2015-2025.pdf"  <!-- 替换为你的PDF路径 -->
-                            type="application/pdf"
-                            width="100%"
-                            height="100%"
-                            class="no-select"
-                        >
-                            <p class="text-subtle dark:text-dark-subtle text-sm p-8 text-center">
-                                无法加载PDF阅读器，请<a href="assets/fed-monetary-policy-2015-2025.pdf" class="text-ink dark:text-dark-ink hover:underline" download disabled>联系管理员</a>获取文档
-                            </p>
-                        </object>
-                    </div>
-                </div>
-            </div>
+                    <!-- PDF 渲染容器（图片式浏览） -->
+<div class="document-viewer bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
+    <div id="pdf-pages-container" class="w-full flex flex-col items-center gap-4 p-4 md:p-6">
+        <!-- 加载提示 -->
+        <div class="py-20 text-subtle dark:text-dark-subtle text-sm font-light" id="pdf-loading">
+            加载文档中...
+        </div>
+    </div>
+</div>
+
+<!-- 引入 PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+    // 配置 PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    // 你的PDF文件路径，替换成你自己的
+    const PDF_URL = 'assets/fed-monetary-policy-2015-2025.pdf';
+
+    const container = document.getElementById('pdf-pages-container');
+    const loadingText = document.getElementById('pdf-loading');
+
+    // 加载PDF
+    pdfjsLib.getDocument(PDF_URL).promise.then(function(pdf) {
+        loadingText.remove();
+        const totalPages = pdf.numPages;
+        const scale = 1.5; // 渲染清晰度，数字越大越清晰但加载越慢
+
+        // 逐页渲染
+        for (let i = 1; i <= totalPages; i++) {
+            pdf.getPage(i).then(function(page) {
+                const viewport = page.getViewport({ scale: scale });
+                
+                // 创建canvas
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                canvas.className = 'w-full max-w-full shadow-sm rounded-sm select-none';
+                
+                container.appendChild(canvas);
+
+                // 渲染页面到canvas
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }
+    }).catch(function(error) {
+        loadingText.textContent = '文档加载失败，请检查文件路径';
+        console.error('PDF加载错误:', error);
+    });
+
+    // 增强防复制：禁用容器内右键、拖拽
+    const viewer = document.querySelector('.document-viewer');
+    viewer.addEventListener('contextmenu', e => e.preventDefault());
+    viewer.addEventListener('dragstart', e => e.preventDefault());
+    viewer.addEventListener('selectstart', e => e.preventDefault());
+</script>
 
             <!-- 政策有效性评估（滚动渐显） -->
             <div class="scroll-reveal">
