@@ -152,20 +152,7 @@
             -ms-user-select: none;
             user-select: none;
         }
-        /* 返回按钮固定样式 */
-        .back-btn {
-            position: fixed;
-            bottom: 3rem;
-            right: 3rem;
-            z-index: 40;
-            transition: all 0.6s ease-smooth;
-        }
-        @media (max-width: 768px) {
-            .back-btn {
-                bottom: 2rem;
-                right: 2rem;
-            }
-        }
+        
     </style>
 </head>
 <body class="bg-paper text-ink antialiased dark:bg-dark-paper dark:text-dark-ink transition-colors duration-1100 ease-smooth">
@@ -188,14 +175,7 @@
         </div>
     </nav>
 
-    <!-- 返回按钮 -->
-    <section class="pb-20 px-6 md:px-12">
-        <div class="max-w-4xl mx-auto text-center scroll-reveal">
-            <a href="index.html#work" class="inline-block font-sans text-xs tracking-widest uppercase text-subtle dark:text-dark-subtle hover:text-ink dark:hover:text-dark-ink transition-colors duration-600">
-                ← 返回作品列表
-            </a>
-        </div>
-    </section>
+  
 
     <!-- 核心内容区 -->
     <section class="pt-32 pb-24 md:pt-40 md:pb-32 px-6 md:px-12">
@@ -413,6 +393,16 @@
         </div>
     </section>
 
+  <!-- 返回按钮 -->
+    <section class="pb-20 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+            <a href="index.html#work" class="inline-block font-sans text-xs tracking-widest uppercase text-subtle dark:text-dark-subtle hover:text-ink dark:hover:text-dark-ink transition-colors duration-600">
+                ← 返回作品列表
+            </a>
+        </div>
+    </section>
+
+                
     <!-- 页脚 -->
     <footer class="py-16 md:py-20 px-6 md:px-12 border-t border-line dark:border-dark-line transition-colors duration-1100 ease-smooth">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 md:gap-10">
