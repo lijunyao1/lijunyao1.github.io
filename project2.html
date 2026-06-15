@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苹果公司美国智能手机市场微观经济学分析 | 研究报告</title>
+    <!-- 全局资源 与首页/Project1 完全一致 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- 设计系统配置 全站统一 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#1f1f1e',
+                        paper: '#f6f6f5',
+                        subtle: '#767673',
+                        line: '#dcdcda',
+                        'dark-ink': '#e6e6e5',
+                        'dark-paper': '#181817',
+                        'dark-subtle': '#888885',
+                        'dark-line': '#2c2c2b',
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '0.35em',
+                        extreme: '0.5em',
+                    },
+                    transitionTimingFunction: {
+                        smooth: 'cubic-bezier(0.25, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 自定义样式 全站复用 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-balance { text-wrap: balance; }
+            .hairline {
+                height: 1px;
+                background: linear-gradient(90deg, transparent, #c0c0be, transparent);
+            }
+            .dark .hairline {
+                background: linear-gradient(90deg, transparent, #383837, transparent);
+            }
+            .scroll-reveal {
+                opacity: 0;
+                transform: translateY(28px);
+                will-change: opacity, transform;
+            }
+            .card-image {
+                transition: all 0.9s ease-smooth;
+            }
+            .group:hover .card-image {
+                filter: brightness(0.97);
+                transform: scale(1.015);
+            }
+            .dark .group:hover .card-image {
+                filter: brightness(1.03);
+            }
+        }
+    </style>
+
+    <!-- 主题初始化 -->
+    <script>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (stored === 'dark' || (!stored && systemDark)) {
+                document.documentElement.classList.add('dark');
+            }
+            document.documentElement.classList.add('no-transition');
+            window.addEventListener('load', () => {
+                setTimeout(() => document.documentElement.classList.remove('no-transition'), 120);
+            });
+        })();
+    </script>
+
+    <!-- 全局基础样式 -->
+    <style>
+        .no-transition, .no-transition * { transition: none !important; }
+        #texture-canvas {
+            position: fixed; inset: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+        }
+        html { scroll-behavior: smooth; }
+        .nav-divider {
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 3rem); max-width: calc(80rem - 3rem); height: 1px;
+            background: linear-gradient(90deg, transparent, #d0d0ce80, transparent);
+        }
+        .dark .nav-divider {
+            background: linear-gradient(90deg, transparent, #33333280, transparent);
+        }
+    </style>
+</head>
+<body class="bg-paper text-ink antialiased dark:bg-dark-paper dark:text-dark-ink transition-colors duration-1100 ease-smooth">
+    <!-- 背景纹理画布 -->
+    <canvas id="texture-canvas"></canvas>
+
+    <!-- 常驻导航栏 与首页完全一致 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-paper/75 dark:bg-dark-paper/75 backdrop-blur-md transition-colors duration-1100 ease-smooth">
+        <div class="relative max-w-6xl mx-auto px-6 md:px-12 py-5 md:py-6 flex justify-between items-center">
+            <div class="font-sans text-[11px] md:text-xs tracking-extreme font-light uppercase">
+                Junyao Li
+            </div>
+            <div class="flex items-center gap-8 md:gap-12 text-[11px] md:text-xs tracking-widest uppercase text-subtle dark:text-dark-subtle font-light">
+                <a href="index.html" class="hover:text-ink dark:hover:text-dark-ink transition-colors duration-600">Home</a>
+                
+                <button id="theme-toggle" aria-label="切换主题" class="py-1 hover:text-ink dark:hover:text-dark-ink transition-colors duration-600 text-base leading-none font-light">◐</button>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+    </nav>
+
+    <!-- 报告首屏 与Project1排版层级完全统一 -->
+    <section class="pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <p class="font-sans text-[11px] tracking-widest uppercase text-subtle dark:text-dark-subtle mb-6">
+                Firm Report · 2025.11
+            </p>
+            <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-light leading-tight mb-8 text-balance">
+                苹果公司在美国智能手机市场的<br>微观经济学分析
+            </h1>
+            <p class="font-sans text-base text-subtle dark:text-dark-subtle max-w-2xl leading-relaxed font-light">
+                基于产业组织理论框架，从市场结构、成本行为、定价策略、需求特征四个维度，
+                拆解苹果公司在美国智能手机市场的竞争逻辑与经济效应。
+            </p>
+        </div>
+    </section>
+
+    <!-- 分隔线 -->
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <div class="hairline w-full"></div>
+    </div>
+
+    <!-- 摘要部分 -->
+    <section class="py-16 md:py-20 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-6">摘要</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-4">
+                本报告聚焦美国智能手机市场，以苹果公司为研究对象，运用微观经济学与产业组织理论展开系统性分析。
+                研究表明，美国智能手机市场属于典型的寡头垄断结构，苹果与三星形成双寡头格局，行业存在显著的技术、
+                品牌与生态三重进入壁垒。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                苹果凭借垂直整合的成本结构与规模经济效应，构建了强大的成本优势；同时通过版本差异化、区域定价、
+                生态捆绑等多重价格歧视策略，实现消费者剩余的最大化攫取。报告进一步分析了消费者偏好特征、需求价格弹性、
+                广告策略以及产业关联效应，最终为理解科技巨头的市场行为提供了微观经济学视角的解释框架。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第一章：市场界定与结构 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">一、市场界定与产业结构</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                本报告将研究范围严格界定为“美国本土智能手机终端市场”，排除平板电脑、智能穿戴等关联品类，
+                也不涵盖应用商店等服务市场。这一界定基于需求替代性原则：智能手机在功能上与其他电子设备存在显著边界，
+                消费者难以在短期内用其他产品替代智能手机的核心功能。
+            </p>
+
+            <!-- 市场份额图表 纯SVG极简风格 -->
+            <div class="my-10 p-6 md:p-8 bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm">
+                <p class="font-sans text-xs text-subtle dark:text-dark-subtle mb-6 tracking-wider uppercase">
+                    图1：2025年美国智能手机市场份额分布
+                </p>
+                <svg viewBox="0 0 600 260" class="w-full">
+                    <g stroke="#8c8c89" stroke-width="0.8" fill="none" class="dark:stroke-[#70706e]">
+                        <!-- 饼图 -->
+                        <circle cx="130" cy="130" r="90" stroke-dasharray="311 253" stroke-dashoffset="0" stroke-width="180" class="text-ink dark:text-dark-ink"/>
+                        <circle cx="130" cy="130" r="90" stroke-dasharray="113 451" stroke-dashoffset="-311" stroke-width="180" stroke="#a8a8a5"/>
+                        <circle cx="130" cy="130" r="90" stroke-dasharray="57 507" stroke-dashoffset="-424" stroke-width="180" stroke="#c4c4c1"/>
+                        <circle cx="130" cy="130" r="90" stroke-dasharray="83 481" stroke-dashoffset="-481" stroke-width="180" stroke="#dcdcda"/>
+                    </g>
+                    <!-- 图例 -->
+                    <g font-family="Inter" font-size="12" fill="#767673" class="dark:fill-[#888885]">
+                        <rect x="280" y="70" width="12" height="12" fill="#1f1f1e" class="dark:fill-[#e6e6e5]"/>
+                        <text x="302" y="80">苹果 Apple · 55%</text>
+                        
+                        <rect x="280" y="105" width="12" height="12" fill="#a8a8a5"/>
+                        <text x="302" y="115">三星 Samsung · 20%</text>
+                        
+                        <rect x="280" y="140" width="12" height="12" fill="#c4c4c1"/>
+                        <text x="302" y="150">其他品牌 · 10%</text>
+                        
+                        <rect x="280" y="175" width="12" height="12" fill="#dcdcda"/>
+                        <text x="302" y="185">联想/摩托罗拉 · 15%</text>
+                    </g>
+                </svg>
+            </div>
+
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-4">
+                从市场结构来看，美国智能手机市场属于“高集中度寡头垄断”。CR2指数超过75%，苹果以约55%的市场份额稳居第一，
+                三星以约20%位居第二，剩余份额由摩托罗拉、谷歌像素等品牌分割。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                行业存在三重进入壁垒：一是技术壁垒，芯片、系统、影像技术的研发投入巨大，存在显著的学习曲线效应；
+                二是生态壁垒，iOS系统形成的闭环生态构成了极高的用户转换成本；三是品牌壁垒，苹果通过长期品牌建设
+                形成了强大的消费者心智占领，新进入者难以在短期内建立同等品牌认知。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第二章：监管与反垄断 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">二、监管环境与反垄断约束</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                美国智能手机市场的主要监管机构为司法部反垄断局与联邦贸易委员会（FTC）。
+                近年来，针对苹果的反垄断调查主要集中在三个领域：应用商店的抽成政策（即「苹果税」）、
+                生态系统的封闭性与反竞争行为、以及智能手机维修权相关的市场垄断。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                尽管存在持续的监管压力，但截至目前，苹果在硬件终端市场尚未被判定存在垄断行为。
+                核心原因在于：智能手机市场存在有效竞争，消费者拥有明确的替代选择；苹果的市场份额
+                尚未达到反垄断法认定的垄断阈值；其高价策略更多是品牌定位与差异化竞争的结果，
+                而非滥用市场支配地位的定价行为。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第三章：成本结构 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">三、成本结构与规模效应</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                苹果公司的成本结构呈现典型的“高固定成本、低边际成本”特征，规模经济效应十分显著。
+                固定成本主要包括研发投入、芯片设计、系统开发、品牌营销与供应链管理费用；
+                边际成本则主要是单台设备的硬件物料成本与组装成本。
+            </p>
+
+            <!-- 成本结构图表 -->
+            <div class="my-10 p-6 md:p-8 bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm">
+                <p class="font-sans text-xs text-subtle dark:text-dark-subtle mb-6 tracking-wider uppercase">
+                    图2：iPhone 单台物料成本结构占比
+                </p>
+                <svg viewBox="0 0 600 220" class="w-full">
+                    <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#70706e]">
+                        <!-- 坐标轴 -->
+                        <line x1="80" y1="40" x2="80" y2="180"/>
+                        <line x1="80" y1="180" x2="540" y2="180"/>
+                        
+                        <!-- 柱状图 -->
+                        <rect x="110" y="70" width="50" height="110" fill="#1f1f1e" opacity="0.8" class="dark:fill-[#e6e6e5]"/>
+                        <rect x="180" y="100" width="50" height="80" fill="#1f1f1e" opacity="0.6" class="dark:fill-[#e6e6e5]"/>
+                        <rect x="250" y="120" width="50" height="60" fill="#1f1f1e" opacity="0.45" class="dark:fill-[#e6e6e5]"/>
+                        <rect x="320" y="135" width="50" height="45" fill="#1f1f1e" opacity="0.35" class="dark:fill-[#e6e6e5]"/>
+                        <rect x="390" y="150" width="50" height="30" fill="#1f1f1e" opacity="0.25" class="dark:fill-[#e6e6e5]"/>
+                        <rect x="460" y="160" width="50" height="20" fill="#1f1f1e" opacity="0.15" class="dark:fill-[#e6e6e5]"/>
+                    </g>
+                    <!-- 标签 -->
+                    <g font-family="Inter" font-size="11" fill="#767673" class="dark:fill-[#888885]" text-anchor="middle">
+                        <text x="135" y="200">芯片</text>
+                        <text x="205" y="200">屏幕</text>
+                        <text x="275" y="200">摄像</text>
+                        <text x="345" y="200">存储</text>
+                        <text x="415" y="200">电池</text>
+                        <text x="485" y="200">其他</text>
+                    </g>
+                </svg>
+            </div>
+
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-4">
+                规模经济主要体现在三个方面：一是采购规模效应，巨大的出货量使苹果在供应链中拥有极强的议价能力，
+                能够以远低于行业平均的价格采购核心零部件；二是研发摊薄效应，巨额的研发投入可以被海量的出货量摊薄，
+                单台设备分摊的研发成本持续降低；三是范围经济效应，iPhone、iPad、Mac、Watch等多条产品线共享
+                芯片架构、系统生态与供应链体系，显著降低了单一产品线的平均成本。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第四章：定价与价格歧视 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">四、定价策略与价格歧视</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                苹果公司是运用价格歧视策略的典型企业，通过多重维度的差异化定价，最大限度地攫取消费者剩余。
+                其价格歧视策略主要分为三级：
+            </p>
+            <div class="space-y-4 mb-6 pl-4 border-l border-line dark:border-dark-line">
+                <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                    <span class="font-medium">一级价格歧视（个性化定价）：</span>
+                    通过教育优惠、以旧换新、运营商合约等方式，针对不同支付意愿的消费者收取不同价格，
+                    尽可能贴近消费者的保留价格。
+                </p>
+                <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                    <span class="font-medium">二级价格歧视（版本差异化）：</span>
+                    通过存储容量、机型等级（数字系列/Pro系列/SE系列）形成不同的产品版本，
+                    让消费者根据自身需求自行选择，实现价格的自动甄别。
+                </p>
+                <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                    <span class="font-medium">三级价格歧视（市场分割）：</span>
+                    针对不同国家和地区制定差异化定价，结合当地居民收入水平、税率与竞争环境，
+                    实现区域间的价格歧视。
+                </p>
+            </div>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                此外，苹果还通过生态捆绑策略实施交叉补贴与搭售定价，iCloud、Apple Music、Apple Care+
+                等服务与硬件产品形成协同效应，进一步强化了用户粘性与整体盈利能力。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第五章：需求与弹性 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">五、消费者偏好与需求弹性</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                美国智能手机市场的消费者偏好呈现显著的分层特征。苹果用户群体具有明显的品牌忠诚度，
+                对价格敏感度较低，更看重产品体验、生态一致性、品牌形象与隐私安全；
+                安卓用户群体则对价格更为敏感，更看重硬件参数、个性化与性价比。
+            </p>
+
+            <!-- 需求曲线示意图 -->
+            <div class="my-10 p-6 md:p-8 bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm">
+                <p class="font-sans text-xs text-subtle dark:text-dark-subtle mb-6 tracking-wider uppercase">
+                    图3：iPhone 需求价格弹性曲线示意
+                </p>
+                <svg viewBox="0 0 600 220" class="w-full">
+                    <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#70706e]">
+                        <!-- 坐标轴 -->
+                        <line x1="80" y1="40" x2="80" y2="180"/>
+                        <line x1="80" y1="180" x2="540" y2="180"/>
+                        
+                        <!-- 需求曲线 -->
+                        <path d="M120 60 Q 220 100, 320 140 T 520 170" stroke="#1f1f1e" stroke-width="1.2" class="dark:stroke-[#e6e6e5]"/>
+                        
+                        <!-- 弹性区间标注线 -->
+                        <line x1="150" y1="75" x2="150" y2="180" stroke-dasharray="2 4"/>
+                        <line x1="350" y1="150" x2="350" y2="180" stroke-dasharray="2 4"/>
+                    </g>
+                    <!-- 轴标签 -->
+                    <g font-family="Inter" font-size="11" fill="#767673" class="dark:fill-[#888885]">
+                        <text x="75" y="35" text-anchor="end">价格 P</text>
+                        <text x="545" y="185">需求量 Q</text>
+                        <text x="150" y="195" text-anchor="middle">富有弹性区间</text>
+                        <text x="350" y="195" text-anchor="middle">缺乏弹性区间</text>
+                    </g>
+                </svg>
+            </div>
+
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-4">
+                从需求价格弹性来看，iPhone整体属于“缺乏弹性”的商品，价格变动对需求量的影响相对有限。
+                据行业测算，iPhone的需求价格弹性约为-0.7，即价格每上涨10%，需求量约下降7%。
+                这一特征源于苹果强大的品牌壁垒、生态锁定效应以及产品的不可替代性。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                但在不同价格带，弹性存在显著差异：入门级机型（如SE系列）价格弹性更高，消费者对价格变动更为敏感；
+                高端Pro系列则弹性极低，核心用户群体几乎不受价格波动影响。这也解释了苹果为何持续推行
+                高端化定价策略——提价带来的收入增量远大于销量下滑带来的损失。
+            </p>
+        </div>
+    </section>
+
+    <!-- 第六章：广告与产业关联 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">六、广告策略与产业关联效应</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                苹果的广告策略以品牌形象塑造为核心，而非产品功能推销。广告投入强度处于行业中等水平，
+                但投放精准度极高，主要聚焦于高端媒体、重要赛事与文化事件，旨在强化品牌的高端定位与文化属性。
+                广告形式以形象片、产品体验短片为主，极少采用价格促销类广告，避免损害品牌溢价。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-6">
+                从产业关联视角看，智能手机产业具有极强的纵向与横向关联效应。纵向维度上，苹果带动了
+                芯片设计、半导体制造、零部件生产、组装代工、物流分销等完整产业链的发展；横向维度上，
+                智能手机作为移动互联网的入口，催生并支撑了移动应用、移动支付、内容娱乐、社交网络等
+                庞大的周边产业生态。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                从一般均衡视角分析，苹果的定价与产品决策不仅影响智能手机市场本身，还会通过产业链传导
+                影响上游半导体行业的产能布局、下游应用开发者的商业模式，甚至整体移动互联网的创新节奏。
+                其产品迭代周期已经成为整个科技产业的重要周期锚点。
+            </p>
+        </div>
+    </section>
+
+    <!-- 结论 -->
+    <section class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8">结论</h2>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90 mb-4">
+                本报告通过微观经济学框架的系统分析，揭示了苹果公司在美国智能手机市场的竞争逻辑：
+                凭借寡头垄断的市场格局、强大的进入壁垒、显著的规模经济效应，配合精准的价格歧视策略
+                与品牌运营，苹果构建了极强的市场控制力与盈利能力。
+            </p>
+            <p class="font-serif text-base md:text-lg leading-relaxed font-light text-ink/90 dark:text-dark-ink/90">
+                从产业发展视角看，这种市场结构既存在创新激励的积极一面——高额利润支撑了巨额研发投入，
+                推动技术持续进步；也存在消费者剩余受损、市场活力下降的潜在问题。如何在激励创新与
+                维护竞争之间取得平衡，是该市场监管面临的长期核心命题。
+            </p>
+        </div>
+    </section>
+
+    <!-- 分隔线 -->
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+        <div class="hairline w-full"></div>
+    </div>
+
+    <!-- 完整报告PDF展示区 与Project1交互一致 -->
+    <section class="py-16 md:py-20 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto scroll-reveal">
+            <h2 class="font-serif text-xl md:text-2xl font-light mb-8 text-center">完整报告</h2>
+            <p class="font-sans text-sm text-subtle dark:text-dark-subtle text-center mb-10 max-w-xl mx-auto">
+                以下为报告全文预览，支持滚动浏览。完整PDF文件可通过学术渠道获取。
+            </p>
+            
+            <!-- PDF渲染容器 -->
+            <div class="bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
+                <div id="pdf-pages-container" class="w-full flex flex-col items-center gap-4 p-4 md:p-6">
+                    <div class="py-20 text-subtle dark:text-dark-subtle text-sm font-light" id="pdf-loading">
+                        正在加载报告文档...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 返回按钮 -->
+    <section class="pb-20 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+            <a href="index.html#work" class="inline-block font-sans text-xs tracking-widest uppercase text-subtle dark:text-dark-subtle hover:text-ink dark:hover:text-dark-ink transition-colors duration-600">
+                ← 返回主页
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 与首页完全一致 -->
+    <footer class="py-16 md:py-20 px-6 md:px-12 border-t border-line dark:border-dark-line transition-colors duration-1100 ease-smooth">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 md:gap-10">
+            <div>
+                <p class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider mb-2 uppercase">Creator</p>
+                <p class="text-sm font-light mb-1">李君尧</p>
+            </div>
+            <div class="text-left md:text-right">
+                <p class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider mb-2 uppercase">Contact</p>
+                <a href="mailto:lijunyao@example.com" class="text-sm font-light hover:text-ink dark:hover:text-dark-ink transition-colors duration-500">lijunyao0301@163.com</a>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-14 pt-8 border-t border-line/50 dark:border-dark-line/50">
+            <p class="text-subtle dark:text-dark-subtle text-[11px] font-light tracking-wide">
+                © 2026 All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- 交互脚本 全站统一 -->
+    <script>
+    // 数学工具
+    const MathUtils = {
+        lerp: (start, end, factor) => start + (end - start) * factor,
+        easeOutQuart: (t) => 1 - Math.pow(1 - t, 4),
+        clamp: (value, min, max) => Math.min(Math.max(value, min), max),
+    };
+
+    // Simplex噪声 背景纹理
+    class SimplexNoise {
+        constructor(seed = Math.random()) {
+            this.p = new Uint8Array(256);
+            for (let i = 0; i < 256; i++) this.p[i] = i;
+            let n, q;
+            for (let i = 255; i > 0; i--) {
+                seed = (seed * 16807) % 2147483647;
+                n = seed % (i + 1);
+                q = this.p[i];
+                this.p[i] = this.p[n];
+                this.p[n] = q;
+            }
+            this.perm = new Uint8Array(512);
+            for (let i = 0; i < 512; i++) this.perm[i] = this.p[i & 255];
+        }
+        noise2D(x, y) {
+            const F2 = 0.5 * (Math.sqrt(3) - 1);
+            const G2 = (3 - Math.sqrt(3)) / 6;
+            const s = (x + y) * F2;
+            const i = Math.floor(x + s);
+            const j = Math.floor(y + s);
+            const t = (i + j) * G2;
+            const x0 = x - (i - t);
+            const y0 = y - (j - t);
+            let i1, j1;
+            if (x0 > y0) { i1 = 1; j1 = 0; } else { i1 = 0; j1 = 1; }
+            const x1 = x0 - i1 + G2;
+            const y1 = y0 - j1 + G2;
+            const x2 = x0 - 1 + 2 * G2;
+            const y2 = y0 - 1 + 2 * G2;
+            const ii = i & 255;
+            const jj = j & 255;
+            let n0 = 0, n1 = 0, n2 = 0;
+            let t0 = 0.5 - x0*x0 - y0*y0;
+            if (t0 >= 0) {
+                t0 *= t0;
+                n0 = t0 * t0 * (x0 * 1 + y0 * 1);
+            }
+            let t1 = 0.5 - x1*x1 - y1*y1;
+            if (t1 >= 0) {
+                t1 *= t1;
+                n1 = t1 * t1 * (x1 * 1 + y1 * 1);
+            }
+            let t2 = 0.5 - x2*x2 - y2*y2;
+            if (t2 >= 0) {
+                t2 *= t2;
+                n2 = t2 * t2 * (x2 * 1 + y2 * 1);
+            }
+            return 70 * (n0 + n1 + n2);
+        }
+    }
+
+    // 背景渲染
+    class TextureRenderer {
+        constructor(canvas) {
+            this.canvas = canvas;
+            this.ctx = canvas.getContext('2d');
+            this.noise = new SimplexNoise(42);
+            this.time = 0;
+            this.dpr = Math.min(window.devicePixelRatio, 2);
+            this.resize();
+            window.addEventListener('resize', () => this.resize());
+            this.start();
+        }
+        resize() {
+            const { innerWidth, innerHeight } = window;
+            this.canvas.width = innerWidth * this.dpr;
+            this.canvas.height = innerHeight * this.dpr;
+            this.canvas.style.width = innerWidth + 'px';
+            this.canvas.style.height = innerHeight + 'px';
+        }
+        render() {
+            this.time += 0.0006;
+            const { width, height } = this;
+            this.ctx.clearRect(0, 0, width, height);
+            const imageData = this.ctx.createImageData(width, height);
+            const data = imageData.data;
+            const isDark = document.documentElement.classList.contains('dark');
+            const baseAlpha = isDark ? 0.018 : 0.025;
+            const color = isDark ? 0 : 120;
+            for (let y = 0; y < height; y += 2) {
+                for (let x = 0; x < width; x += 2) {
+                    const nx = x / width * 3.5;
+                    const ny = y / height * 3.5;
+                    let value = 0;
+                    value += this.noise.noise2D(nx + this.time, ny) * 0.5;
+                    value += this.noise.noise2D(nx * 2 + this.time * 1.3, ny * 2) * 0.25;
+                    value = (value + 0.875) / 1.75;
+                    const grain = Math.random() * 0.25 - 0.125;
+                    const finalValue = MathUtils.clamp(value + grain, 0, 1);
+                    const alpha = finalValue * baseAlpha * 255;
+                    for (let dy = 0; dy < 2 && y + dy < height; dy++) {
+                        for (let dx = 0; dx < 2 && x + dx < width; dx++) {
+                            const idx = ((y + dy) * width + (x + dx)) * 4;
+                            data[idx] = color;
+                            data[idx + 1] = color;
+                            data[idx + 2] = color;
+                            data[idx + 3] = alpha;
+                        }
+                    }
+                }
+            }
+            this.ctx.putImageData(imageData, 0, 0);
+        }
+        start() {
+            const loop = () => {
+                this.render();
+                this.rafId = requestAnimationFrame(loop);
+            };
+            this.rafId = requestAnimationFrame(loop);
+        }
+    }
+
+    // 滚动渐显系统
+    class ScrollRevealSystem {
+        constructor() {
+            this.elements = document.querySelectorAll('.scroll-reveal');
+            this.windowHeight = window.innerHeight;
+            window.addEventListener('resize', () => {
+                this.windowHeight = window.innerHeight;
+            });
+            this.update();
+            this.start();
+        }
+        update() {
+            const scrollY = window.scrollY;
+            this.elements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                const elementTop = rect.top;
+                const visibleStart = this.windowHeight * 0.88;
+                let progress = 0;
+                if (elementTop < visibleStart) {
+                    progress = MathUtils.clamp(
+                        (visibleStart - elementTop) / 200,
+                        0, 1
+                    );
+                }
+                const eased = MathUtils.easeOutQuart(progress);
+                el.style.opacity = eased;
+                el.style.transform = `translateY(${(1 - eased) * 28}px)`;
+            });
+        }
+        start() {
+            window.addEventListener('scroll', () => {
+                requestAnimationFrame(() => this.update());
+            });
+        }
+    }
+
+    // 主题切换
+    class ThemeSystem {
+        constructor(toggleBtn) {
+            this.toggle = toggleBtn;
+            this.toggle.addEventListener('click', () => this.toggleTheme());
+        }
+        toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+    }
+
+    // PDF渲染
+    function initPDF() {
+        const pdfUrl = 'assets/apple-market-analysis.pdf';
+        const container = document.getElementById('pdf-pages-container');
+        const loadingText = document.getElementById('pdf-loading');
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+            loadingText.remove();
+            const scale = 1.5;
+            for (let i = 1; i <= pdf.numPages; i++) {
+                pdf.getPage(i).then(function(page) {
+                    const viewport = page.getViewport({ scale: scale });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    canvas.className = 'w-full max-w-full shadow-sm rounded-sm select-none';
+                    container.appendChild(canvas);
+                    page.render({ canvasContext: context, viewport: viewport });
+                });
+            }
+        }).catch(function(error) {
+            loadingText.textContent = '请将PDF文件放置于 assets/apple-market-analysis.pdf 路径下';
+            console.warn('PDF加载提示:', error);
+        });
+    }
+
+    // 页面初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        new TextureRenderer(document.getElementById('texture-canvas'));
+        new ScrollRevealSystem();
+        new ThemeSystem(document.getElementById('theme-toggle'));
+        initPDF();
+    });
+    </script>
+</body>
+</html>
