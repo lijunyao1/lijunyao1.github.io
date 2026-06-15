@@ -170,213 +170,131 @@
         <div id="scroll-hint" class="absolute bottom-11 md:bottom-14 left-1/2 -translate-x-1/2 w-px h-7 md:h-8 bg-subtle/25 dark:bg-dark-subtle/25 animate-float transition-opacity duration-1200 ease-smooth"></div>
     </section>
 
-    <section id="works" class="py-24 md:py-36 px-6 md:px-12">
-        <div class="max-w-6xl mx-auto">
-            <div class="scroll-reveal mb-20 md:mb-24">
-                <p class="text-subtle dark:text-dark-subtle text-[11px] md:text-xs tracking-extreme uppercase font-light mb-4">Research Papers</p>
-                <h2 class="font-serif text-2xl md:text-3xl font-light">分析报告</h2>
-            </div>
+    <!-- 作品展示区 Work -->
+<section id="work" class="pb-32 md:pb-40 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="scroll-reveal mb-16 md:mb-20">
+      <p class="font-sans text-[11px] tracking-widest uppercase text-subtle dark:text-dark-subtle mb-4">Selected Work</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-light text-ink dark:text-dark-ink">研究项目</h2>
+    </div>
 
-            <div class="space-y-0">
-                <article class="scroll-reveal group border-t border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm">
-                    <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
-                        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
-                            <svg viewBox="0 0 600 400" class="w-full h-44 md:h-60 geo-svg">
-  <defs>
-    <!-- 定义一个可复用的光晕滤镜 -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-  <rect width="600" height="400" fill="transparent"/>
-  <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-    <!-- 基础网格线 -->
-    <line x1="100" y1="110" x2="500" y2="110"/>
-    <line x1="100" y1="170" x2="500" y2="170"/>
-    <line x1="100" y1="230" x2="500" y2="230"/>
-    <line x1="100" y1="290" x2="500" y2="290"/>
-    <line x1="180" y1="110" x2="180" y2="290"/>
-    <line x1="300" y1="110" x2="300" y2="290"/>
-    <line x1="420" y1="110" x2="420" y2="290"/>
-    
-    <!-- 动态外圈 -->
-    <circle cx="300" cy="200" r="70" filter="url(#glow)">
-      <animate
-        attributeName="r"
-        values="70;72;70"
-        dur="8s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="stroke-opacity"
-        values="0.4;0.8;0.4"
-        dur="8s"
-        repeatCount="indefinite"
-      />
-    </circle>
-    
-    <!-- 动态中圈 -->
-    <circle cx="300" cy="200" r="45">
-      <animate
-        attributeName="r"
-        values="45;47;45"
-        dur="6s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="stroke-dasharray"
-        values="1 1.5; 1.5 1; 1 1.5"
-        dur="4s"
-        repeatCount="indefinite"
-      />
-    </circle>
-    
-    <!-- 动态内圈 -->
-    <circle cx="300" cy="200" r="20">
-      <animate
-        attributeName="r"
-        values="20;22;20"
-        dur="4s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="stroke"
-        values="#8c8c89;#1f1f1e;#8c8c89"
-        dur="4s"
-        repeatCount="indefinite"
-      />
-    </circle>
-  </g>
-</svg>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center w-full">
-                            <div class="flex items-center gap-5 mb-4">
-                                
-                                <span class="text-subtle dark:text-dark-subtle text-[11px]">2026.01</span>
-                            </div>
-                            <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
-                                美联储货币政策十年评估（2015-2025）
-                            </h3>
-                            <p class="text-subtle dark:text-dark-subtle text-sm leading-relaxed max-w-xl mb-7 font-light">
-                                以2020年疫情危机为核心样本，拆解美联储三轮政策响应逻辑，从就业、通胀、金融稳定三个维度评估政策有效性与长期影响。
-                            </p>
-                            <a href="project1.html" class="text-[11px] tracking-widest text-subtle dark:text-dark-subtle border border-line dark:border-dark-line w-fit px-5 py-2 group-hover:border-ink dark:group-hover:border-dark-ink group-hover:text-ink dark:group-hover:text-dark-ink transition-all duration-700 uppercase">
-                                Read Paper
-                            </a>
-                        </div>
-                    </div>
-                </article>
+    <div class="hairline w-full mb-2"></div>
 
-                <article class="scroll-reveal group border-t border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm">
-                    <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
-                        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
-                            <svg viewBox="0 0 600 400" class="w-full h-44 md:h-60 geo-svg">
-                                <rect width="600" height="400" fill="transparent"/>
-                                <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-                                    <line x1="120" y1="290" x2="480" y2="110"/>
-                                    <line x1="120" y1="310" x2="480" y2="130"/>
-                                    <line x1="120" y1="330" x2="480" y2="150"/>
-                                    <line x1="120" y1="350" x2="480" y2="170"/>
-                                    <line x1="200" y1="250" x2="200" y2="350"/>
-                                    <line x1="300" y1="200" x2="300" y2="300"/>
-                                    <line x1="400" y1="150" x2="400" y2="250"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center w-full">
-                            <div class="flex items-center gap-5 mb-4">
-                                <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">02</span>
-                                <span class="text-subtle dark:text-dark-subtle text-[11px]">2026.01</span>
-                            </div>
-                            <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
-                                人口结构变迁下的长期经济增长路径
-                            </h3>
-                            <p class="text-subtle dark:text-dark-subtle text-sm leading-relaxed max-w-xl mb-7 font-light">
-                                从人力资本与储蓄率双重视角，分析人口老龄化对经济潜在增速的影响及公共政策的应对框架。
-                            </p>
-                            <span class="text-[11px] tracking-widest text-subtle dark:text-dark-subtle border border-line dark:border-dark-line w-fit px-5 py-2 group-hover:border-ink dark:group-hover:border-dark-ink group-hover:text-ink dark:group-hover:text-dark-ink transition-all duration-700 uppercase">
-                                Read Paper
-                            </span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="scroll-reveal group border-t border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm">
-                    <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
-                        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
-                            <svg viewBox="0 0 600 400" class="w-full h-44 md:h-60 geo-svg">
-                                <rect width="600" height="400" fill="transparent"/>
-                                <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-                                    <rect x="170" y="110" width="260" height="180"/>
-                                    <rect x="200" y="140" width="200" height="120"/>
-                                    <rect x="230" y="170" width="140" height="60"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center w-full">
-                            <div class="flex items-center gap-5 mb-4">
-                                <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">03</span>
-                                <span class="text-subtle dark:text-dark-subtle text-[11px]">2025.11</span>
-                            </div>
-                            <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
-                                产业政策的有效性边界与制度条件
-                            </h3>
-                            <p class="text-subtle dark:text-dark-subtle text-sm leading-relaxed max-w-xl mb-7 font-light">
-                                结合东亚经济体的发展经验，讨论产业政策成功实施所需的制度基础、市场环境与治理能力。
-                            </p>
-                            <span class="text-[11px] tracking-widest text-subtle dark:text-dark-subtle border border-line dark:border-dark-line w-fit px-5 py-2 group-hover:border-ink dark:group-hover:border-dark-ink group-hover:text-ink dark:group-hover:text-dark-ink transition-all duration-700 uppercase">
-                                Read Paper
-                            </span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="scroll-reveal group border-t border-b border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm">
-                    <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
-                        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
-                            <svg viewBox="0 0 600 400" class="w-full h-44 md:h-60 geo-svg">
-                                <rect width="600" height="400" fill="transparent"/>
-                                <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-                                    <circle cx="200" cy="150" r="3.5" fill="#8c8c89" stroke="none" class="dark:fill-[#5f5f5c]"/>
-                                    <circle cx="300" cy="190" r="3.5" fill="#8c8c89" stroke="none" class="dark:fill-[#5f5f5c]"/>
-                                    <circle cx="400" cy="150" r="3.5" fill="#8c8c89" stroke="none" class="dark:fill-[#5f5f5c]"/>
-                                    <circle cx="250" cy="260" r="3.5" fill="#8c8c89" stroke="none" class="dark:fill-[#5f5f5c]"/>
-                                    <circle cx="350" cy="260" r="3.5" fill="#8c8c89" stroke="none" class="dark:fill-[#5f5f5c]"/>
-                                    <line x1="200" y1="150" x2="300" y2="190"/>
-                                    <line x1="300" y1="190" x2="400" y2="150"/>
-                                    <line x1="200" y1="150" x2="250" y2="260"/>
-                                    <line x1="300" y1="190" x2="250" y2="260"/>
-                                    <line x1="300" y1="190" x2="350" y2="260"/>
-                                    <line x1="400" y1="150" x2="350" y2="260"/>
-                                    <line x1="250" y1="260" x2="350" y2="260"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center w-full">
-                            <div class="flex items-center gap-5 mb-4">
-                                <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">04</span>
-                                <span class="text-subtle dark:text-dark-subtle text-[11px]">2025.09</span>
-                            </div>
-                            <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
-                                数字经济对收入分配结构的重塑
-                            </h3>
-                            <p class="text-subtle dark:text-dark-subtle text-sm leading-relaxed max-w-xl mb-7 font-light">
-                                从技能溢价与平台垄断两个维度，分析数字化转型对劳动收入份额与收入差距的深层影响。
-                            </p>
-                            <span class="text-[11px] tracking-widest text-subtle dark:text-dark-subtle border border-line dark:border-dark-line w-fit px-5 py-2 group-hover:border-ink dark:group-hover:border-dark-ink group-hover:text-ink dark:group-hover:text-dark-ink transition-all duration-700 uppercase">
-                                Read Paper
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </div>
+    <!-- 项目 1 -->
+    <a 
+      href="project1.html" 
+      class="block group scroll-reveal border-b border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm"
+    >
+      <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
+        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
+          <img 
+            src="assets/1.jpg" 
+            alt="美联储货币政策十年评估" 
+            class="w-full h-44 md:h-60 object-cover card-image"
+          >
         </div>
-    </section>
+        <div class="flex-1 flex flex-col justify-center w-full">
+          <div class="flex items-center gap-5 mb-4">
+            <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">01</span>
+            <span class="text-subtle dark:text-dark-subtle text-[11px]">2026.03</span>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
+            美联储货币政策十年评估（2015-2025）
+          </h3>
+          <p class="font-sans text-sm text-subtle dark:text-dark-subtle max-w-xl leading-relaxed font-light">
+            以2020年疫情危机为核心样本，拆解美联储三轮政策响应逻辑，从就业、通胀、金融稳定三个维度评估政策有效性与长期影响。
+          </p>
+        </div>
+      </div>
+    </a>
 
+    <!-- 项目 2 -->
+    <a 
+      href="project2.html" 
+      class="block group scroll-reveal border-b border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm"
+    >
+      <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
+        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
+          <img 
+            src="assets/2.jpg" 
+            alt="货币政策传导机制研究" 
+            class="w-full h-44 md:h-60 object-cover card-image"
+          >
+        </div>
+        <div class="flex-1 flex flex-col justify-center w-full">
+          <div class="flex items-center gap-5 mb-4">
+            <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">02</span>
+            <span class="text-subtle dark:text-dark-subtle text-[11px]">2026.02</span>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
+            货币政策传导机制的结构性差异研究
+          </h3>
+          <p class="font-sans text-sm text-subtle dark:text-dark-subtle max-w-xl leading-relaxed font-light">
+            基于不同经济体的比较分析，探讨货币政策在产业结构与金融市场差异下的传导效率差异，以及对实体经济的差异化影响。
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- 项目 3 -->
+    <a 
+      href="project3.html" 
+      class="block group scroll-reveal border-b border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm"
+    >
+      <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
+        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
+          <img 
+            src="assets/3.jpg" 
+            alt="全球通胀周期分析" 
+            class="w-full h-44 md:h-60 object-cover card-image"
+          >
+        </div>
+        <div class="flex-1 flex flex-col justify-center w-full">
+          <div class="flex items-center gap-5 mb-4">
+            <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">03</span>
+            <span class="text-subtle dark:text-dark-subtle text-[11px]">2026.01</span>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
+            后疫情时代全球通胀周期与政策应对
+          </h3>
+          <p class="font-sans text-sm text-subtle dark:text-dark-subtle max-w-xl leading-relaxed font-light">
+            梳理2021-2025年全球通胀的形成机制与演化路径，对比主要央行紧缩政策的得失，总结高通胀环境下的政策框架。
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- 项目 4 -->
+    <a 
+      href="project4.html" 
+      class="block group scroll-reveal border-b border-line dark:border-dark-line py-12 md:py-14 hover:bg-white/30 dark:hover:bg-white/[0.025] transition-colors duration-800 px-3 -mx-3 rounded-sm"
+    >
+      <div class="flex flex-col md:flex-row gap-7 md:gap-14 items-center">
+        <div class="w-full md:w-[42%] flex-shrink-0 overflow-hidden bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60">
+          <img 
+            src="assets/4.jpg" 
+            alt="金融稳定与宏观审慎政策" 
+            class="w-full h-44 md:h-60 object-cover card-image"
+          >
+        </div>
+        <div class="flex-1 flex flex-col justify-center w-full">
+          <div class="flex items-center gap-5 mb-4">
+            <span class="text-subtle dark:text-dark-subtle text-[11px] tracking-wider font-light">04</span>
+            <span class="text-subtle dark:text-dark-subtle text-[11px]">2025.12</span>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl font-light mb-4 group-hover:translate-x-1.5 transition-transform duration-800">
+            银行业风险与宏观审慎政策框架研究
+          </h3>
+          <p class="font-sans text-sm text-subtle dark:text-dark-subtle max-w-xl leading-relaxed font-light">
+            以欧美银行业风险事件为案例，分析利率快速上行环境下的金融脆弱性，探讨货币政策与宏观审慎政策的协调机制。
+          </p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+    
     <section id="about" class="py-24 md:py-36 px-6 md:px-12 bg-white/20 dark:bg-white/[0.015] transition-colors duration-1100 ease-smooth">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-12 gap-12 md:gap-20">
