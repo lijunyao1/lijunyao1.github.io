@@ -152,7 +152,20 @@
             -ms-user-select: none;
             user-select: none;
         }
-        
+        /* 返回按钮固定样式 - 已修改为左侧 */
+        .back-btn {
+            position: fixed;
+            bottom: 3rem;
+            left: 3rem; /* 核心修改：right → left */
+            z-index: 40;
+            transition: all 0.6s ease-smooth;
+        }
+        @media (max-width: 768px) {
+            .back-btn {
+                bottom: 2rem;
+                left: 2rem; /* 移动端同步修改：right → left */
+            }
+        }
     </style>
 </head>
 <body class="bg-paper text-ink antialiased dark:bg-dark-paper dark:text-dark-ink transition-colors duration-1100 ease-smooth">
@@ -175,9 +188,12 @@
         </div>
     </nav>
 
-  
+    <!-- 固定返回主页按钮（位置已改为左侧） -->
+    <a href="index.html" class="back-btn bg-paper/80 dark:bg-dark-paper/80 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center border border-line dark:border-dark-line hover:border-ink dark:hover:border-dark-ink transition-all duration-600">
+        <span class="text-[11px] font-light">←</span>
+    </a>
 
-    <!-- 核心内容区 -->
+    <!-- 核心内容区（无修改） -->
     <section class="pt-32 pb-24 md:pt-40 md:pb-32 px-6 md:px-12">
         <div class="max-w-4xl mx-auto">
             <!-- 标题区（滚动渐显） -->
@@ -300,67 +316,22 @@
                     <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
                         以下为完整研究报告（PDF），仅支持浏览，禁止复制/下载
                     </p>
-                    <!-- PDF 渲染容器（图片式浏览） -->
-<div class="document-viewer bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
-    <div id="pdf-pages-container" class="w-full flex flex-col items-center gap-4 p-4 md:p-6">
-        <!-- 加载提示 -->
-        <div class="py-20 text-subtle dark:text-dark-subtle text-sm font-light" id="pdf-loading">
-            加载文档中...
-        </div>
-    </div>
-</div>
-
-<!-- 引入 PDF.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script>
-    // 配置 PDF.js worker
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    // 你的PDF文件路径，替换成你自己的
-    const PDF_URL = 'assets/fed-monetary-policy-2015-2025.pdf';
-
-    const container = document.getElementById('pdf-pages-container');
-    const loadingText = document.getElementById('pdf-loading');
-
-    // 加载PDF
-    pdfjsLib.getDocument(PDF_URL).promise.then(function(pdf) {
-        loadingText.remove();
-        const totalPages = pdf.numPages;
-        const scale = 1.5; // 渲染清晰度，数字越大越清晰但加载越慢
-
-        // 逐页渲染
-        for (let i = 1; i <= totalPages; i++) {
-            pdf.getPage(i).then(function(page) {
-                const viewport = page.getViewport({ scale: scale });
-                
-                // 创建canvas
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-                canvas.className = 'w-full max-w-full shadow-sm rounded-sm select-none';
-                
-                container.appendChild(canvas);
-
-                // 渲染页面到canvas
-                const renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext);
-            });
-        }
-    }).catch(function(error) {
-        loadingText.textContent = '文档加载失败，请检查文件路径';
-        console.error('PDF加载错误:', error);
-    });
-
-    // 增强防复制：禁用容器内右键、拖拽
-    const viewer = document.querySelector('.document-viewer');
-    viewer.addEventListener('contextmenu', e => e.preventDefault());
-    viewer.addEventListener('dragstart', e => e.preventDefault());
-    viewer.addEventListener('selectstart', e => e.preventDefault());
-</script>
+                    <!-- PDF展示容器（替换为你的PDF文件路径，建议放在GitHub Pages的assets目录） -->
+                    <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
+                        <object 
+                            data="assets/fed-monetary-policy-2015-2025.pdf"  <!-- 替换为你的PDF路径 -->
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                            class="no-select"
+                        >
+                            <p class="text-subtle dark:text-dark-subtle text-sm p-8 text-center">
+                                无法加载PDF阅读器，请<a href="assets/fed-monetary-policy-2015-2025.pdf" class="text-ink dark:text-dark-ink hover:underline" download disabled>联系管理员</a>获取文档
+                            </p>
+                        </object>
+                    </div>
+                </div>
+            </div>
 
             <!-- 政策有效性评估（滚动渐显） -->
             <div class="scroll-reveal">
@@ -393,16 +364,6 @@
         </div>
     </section>
 
-  <!-- 返回按钮 -->
-    <section class="py-40 px-6 md:px-12 flex items-center justify-center">
-    <div class="max-w-4xl mx-auto text-center scroll-reveal">
-        <a href="index.html#work" class="inline-block font-sans text-xs tracking-widest uppercase text-subtle dark:text-dark-subtle hover:text-ink dark:hover:text-dark-ink transition-colors duration-600">
-            ← 返回主页
-        </a>
-    </div>
-</section>
-
-                
     <!-- 页脚 -->
     <footer class="py-16 md:py-20 px-6 md:px-12 border-t border-line dark:border-dark-line transition-colors duration-1100 ease-smooth">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 md:gap-10">
