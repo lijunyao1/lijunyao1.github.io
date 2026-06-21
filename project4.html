@@ -296,18 +296,19 @@
         <div class="hairline w-full"></div>
     </div>
 
-    <!-- PDF完整报告区域（修改为可滚动版本） -->
+    <!-- PDF完整报告区域（重写修复显示问题） -->
     <section class="py-16 md:py-20 px-6 md:px-12">
         <div class="max-w-4xl mx-auto scroll-reveal">
             <h2 class="font-serif text-xl md:text-2xl font-light mb-8 text-center">完整原版报告</h2>
             <p class="font-sans text-sm text-subtle dark:text-dark-subtle text-center mb-10 max-w-xl mx-auto">
                 预览仅图像渲染，禁止复制文字、右键保存；完整PDF文件部署路径说明见下方注释。
             </p>
+            <!-- 重写PDF容器结构 -->
             <div class="bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden no-select">
-                <!-- 核心修改：PDF滚动容器 -->
-                <div id="pdf-pages-container" class="pdf-scroll-container w-full h-[70vh] overflow-y-auto p-4 md:p-6">
-                    <div id="pdf-content" class="flex flex-col items-center gap-4">
-                        <div class="py-20 text-subtle dark:text-dark-subtle text-sm font-light" id="pdf-loading">
+                <div id="pdf-scroll-container" class="pdf-scroll-container w-full h-[70vh] overflow-y-auto p-4 md:p-6">
+                    <div id="pdf-render-container" class="w-full flex flex-col items-center gap-4">
+                        <!-- PDF加载状态提示 -->
+                        <div id="pdf-loading-state" class="py-20 text-subtle dark:text-dark-subtle text-sm font-light">
                             正在加载报告文档...
                         </div>
                     </div>
@@ -507,49 +508,82 @@
     // 完整访问路径：仓库根目录/assets/australia-covid-macro-analysis.pdf
     // GitHub Pages访问地址示例：xxx.github.io/仓库名/assets/australia-covid-macro-analysis.pdf
     // ==============================================================
-    function initPDF() {
-        const pdfUrl = 'assets/australia-covid-macro-analysis.pdf';
-        const container = document.getElementById('pdf-content'); // 修改：指向内部容器
-        const loadingText = document.getElementById('pdf-loading');
-
+    
+    // 重写PDF初始化逻辑（修复显示问题）
+    async function initPDF() {
+        // 核心配置
+        const PDF_URL = 'assets/australia-covid-macro-analysis.pdf';
+        const RENDER_SCALE = window.devicePixelRatio || 1; // 适配设备像素比
+        const CONTAINER = document.getElementById('pdf-render-container');
+        const LOADING_STATE = document.getElementById('pdf-loading-state');
+        
+        // 配置PDF.js worker
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        pdfjsLib.getDocument({
-            url: pdfUrl,
-            disableTextLayer: true,
-            disableAnnotationLayer: true
-        }).promise.then(pdf=>{
-            loadingText.remove();
-            const scale = 1.5;
-            for(let i=1;i<=pdf.numPages;i++){
-                pdf.getPage(i).then(page=>{
-                    const viewport = page.getViewport({scale});
-                    const canvas = document.createElement('canvas');
-                    // 优化canvas样式：宽度适配容器，高度自动
-                    canvas.className = 'w-full max-w-full shadow-sm rounded-sm pdf-canvas no-select mb-4';
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-                    const ctx = canvas.getContext('2d');
-                    page.render({canvasContext:ctx, viewport}).promise.then(()=>container.appendChild(canvas));
-                })
+
+        try {
+            // 加载PDF文档
+            const pdfDoc = await pdfjsLib.getDocument({
+                url: PDF_URL,
+                disableTextLayer: true, // 禁用文本层（防复制）
+                disableAnnotationLayer: true, // 禁用注释层
+                cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/', // 解决字体映射问题
+                cMapPacked: true
+            }).promise;
+
+            // 移除加载提示
+            LOADING_STATE.remove();
+
+            // 逐页渲染PDF
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                // 获取单页
+                const page = await pdfDoc.getPage(pageNum);
+                
+                // 获取视口（适配容器宽度）
+                const viewport = page.getViewport({
+                    scale: RENDER_SCALE,
+                    // 适配容器宽度，最大宽度为容器宽度
+                    width: CONTAINER.clientWidth - 32 // 减去padding
+                });
+
+                // 创建canvas元素
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // 设置canvas尺寸（适配设备像素比）
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                canvas.className = 'w-full max-w-full shadow-sm rounded-sm pdf-canvas no-select mb-4';
+                
+                // 渲染页面到canvas
+                await page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                }).promise;
+
+                // 添加到渲染容器
+                CONTAINER.appendChild(canvas);
             }
-        }).catch(err=>{
-            loadingText.textContent = 'PDF加载失败：请确认文件路径 assets/australia-covid-macro-analysis.pdf 存在';
-            console.error(err);
-        })
+        } catch (error) {
+            // 错误处理
+            LOADING_STATE.textContent = `PDF加载失败：${error.message}，请确认文件路径 assets/australia-covid-macro-analysis.pdf 存在`;
+            console.error('PDF加载错误：', error);
+        }
     }
 
     // 禁止PDF区域右键复制
-    document.addEventListener('contextmenu', e=>{
-        if(e.target.closest('#pdf-pages-container')) e.preventDefault();
-    })
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.closest('#pdf-scroll-container')) {
+            e.preventDefault();
+        }
+    });
 
     // 页面初始化
     document.addEventListener('DOMContentLoaded', ()=>{
         new TextureRenderer(document.getElementById('texture-canvas'));
         new ScrollRevealSystem();
         new ThemeSystem(document.getElementById('theme-toggle'));
-        initPDF();
-    })
+        initPDF(); // 执行重写后的PDF初始化
+    });
     </script>
 </body>
 </html>
