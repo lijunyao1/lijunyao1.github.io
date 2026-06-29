@@ -308,7 +308,7 @@
                 </div>
             </div>
 
-            <!-- 原版文档展示区（防复制） -->
+                        <!-- 原版文档展示区（防复制） -->
             <div class="scroll-reveal mb-16 md:mb-24">
                 <h3 class="font-serif text-xl md:text-2xl font-light mb-8">原版研究报告</h3>
                 <div class="hairline w-full mb-8"></div>
@@ -316,19 +316,29 @@
                     <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
                         以下为完整研究报告（PDF），仅支持浏览，禁止复制/下载
                     </p>
-                    <!-- PDF展示容器（替换为你的PDF文件路径，建议放在GitHub Pages的assets目录） -->
+                    <!-- PDF展示容器（优化兼容性） -->
                     <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
-                        <object 
-                            data="assets/fed-monetary-policy-2015-2025.pdf"  <!-- 替换为你的PDF路径 -->
-                            type="application/pdf"
+                        <!-- 替换为iframe提升兼容性，保留防复制属性 -->
+                        <iframe 
+                            src="assets/fed-monetary-policy-2015-2025.pdf"  <!-- 替换为你的PDF路径 -->
                             width="100%"
                             height="100%"
                             class="no-select"
+                            frameborder="0"
+                            scrolling="auto"
+                            sandbox="allow-same-origin"  <!-- 限制沙箱权限，增强防复制 -->
                         >
-                            <p class="text-subtle dark:text-dark-subtle text-sm p-8 text-center">
-                                无法加载PDF阅读器，请<a href="assets/fed-monetary-policy-2015-2025.pdf" class="text-ink dark:text-dark-ink hover:underline" download disabled>联系管理员</a>获取文档
-                            </p>
-                        </object>
+                            <!-- 增强型错误提示 -->
+                            <div class="flex flex-col items-center justify-center h-full w-full text-subtle dark:text-dark-subtle text-sm p-8">
+                                <p class="mb-4">无法内置加载PDF文档</p>
+                                <p>请检查PDF文件路径是否正确，或使用PDF阅读器打开以下链接：</p>
+                                <a href="assets/fed-monetary-policy-2015-2025.pdf" 
+                                   class="mt-4 text-ink dark:text-dark-ink hover:underline no-select"
+                                   onclick="event.preventDefault(); alert('文档仅支持浏览，禁止下载');">
+                                    fed-monetary-policy-2015-2025.pdf
+                                </a>
+                            </div>
+                        </iframe>
                     </div>
                 </div>
             </div>
