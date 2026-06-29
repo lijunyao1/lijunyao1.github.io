@@ -301,41 +301,40 @@
                     </div>
                 </div>
             </div>
-            <!-- ========== 完全重写优化后的原版文档展示区 ========== -->
-            <div class="scroll-reveal mb-16 md:mb-24">
-                <h3 class="font-serif text-xl md:text-2xl font-light mb-8">原版研究报告</h3>
-                <div class="hairline w-full mb-8"></div>
-                <div class="document-viewer bg-white/20 dark:bg-white/[0.02] border border-line dark:border-dark-line p-4 md:p-6 rounded-sm">
-                    <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
-                        以下为完整研究报告（PDF），仅支持页面内浏览，禁止复制、保存、打印文档
-                    </p>
-                    <!-- PDF容器，高度、样式完全沿用原设定 -->
-                    <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden relative">
-                        <!-- iframe 主流浏览器PDF兼容方案 -->
-                        <iframe 
-                            src="assets/fed-monetary-policy-2015-2025.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                            width="100%"
-                            height="100%"
-                            class="no-select block"
-                            frameborder="0"
-                            scrolling="auto"
-                            sandbox="allow-same-origin allow-scripts"
-                        >
-                            <!-- iframe加载失败兜底提示 -->
-                            <div class="w-full h-full flex flex-col justify-center items-center p-6 text-subtle dark:text-dark-subtle">
-                                <p class="text-base mb-3">PDF文档加载失败</p>
-                                <p class="text-sm mb-2">排查方案：</p>
-                                <p class="text-sm mb-1">1. 确认项目根目录存在 assets 文件夹</p>
-                                <p class="text-sm mb-1">2. 确认文件名为 fed-monetary-policy-2015-2025.pdf</p>
-                                <p class="text-sm mb-4">3. 本地打开文件需使用 http 服务，不能直接双击本地html</p>
-                                <span class="text-sm">如需查阅文档，请联系管理员获取资料</span>
-                            </div>
-                        </iframe>
-                        <!-- 顶层遮罩，彻底屏蔽右键/拖拽复制，底层iframe仅做浏览 -->
-                        <div class="absolute inset-0 z-10"></div>
-                    </div>
+          <!-- 原版文档展示区（完全重写重构，其余页面代码不变） -->
+<div class="scroll-reveal mb-16 md:mb-24">
+    <h3 class="font-serif text-xl md:text-2xl font-light mb-8">原版研究报告</h3>
+    <div class="hairline w-full mb-8"></div>
+    <div class="document-viewer bg-white/20 dark:bg-white/[0.02] border border-line dark:border-dark-line p-4 md:p-6 rounded-sm">
+        <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
+            完整研究报告PDF，受浏览器安全策略限制，无法直接内嵌完整预览；仅支持合规线上服务访问，禁止复制、下载、打印文档。
+        </p>
+        <!-- PDF容器，尺寸完全沿用原h-[80vh]高度 -->
+        <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden relative flex items-center justify-center p-6">
+            <!-- 静态兜底提示面板，替代失效的object/iframe -->
+            <div class="text-center max-w-lg">
+                <svg class="w-16 h-16 mx-auto mb-6 text-subtle dark:text-dark-subtle opacity-60" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <h4 class="font-serif text-lg font-light mb-4 text-ink dark:text-dark-ink">PDF文档预览受限</h4>
+                <div class="text-subtle dark:text-dark-subtle text-sm space-y-3 text-left">
+                    <p>无法内嵌加载PDF常见原因：</p>
+                    <p>1. 本地直接打开HTML（file协议）浏览器拦截PDF嵌入；</p>
+                    <p>2. 文件路径错误：根目录/assets/fed-monetary-policy-2015-2025.pdf 不存在；</p>
+                    <p>3. 浏览器插件/安全策略屏蔽PDF阅读器；</p>
+                    <p>4. 静态服务器未正确配置PDF MIME类型。</p>
                 </div>
+                <div class="hairline w-24 mx-auto my-6"></div>
+                <button id="openPdfBtn" class="px-5 py-2 border border-line dark:border-dark-line rounded-sm text-sm hover:text-ink dark:hover:text-dark-ink transition-colors duration-500 no-select">
+                    申请查阅文档（禁止下载）
+                </button>
+                <p class="mt-4 text-[11px] text-subtle dark:text-dark-subtle">如需获取完整报告，请联系管理员邮箱：lijunyao0301@163.com</p>
             </div>
+            <!-- 全屏遮罩，拦截所有鼠标操作，防复制拖拽 -->
+            <div class="absolute inset-0 z-10"></div>
+        </div>
+    </div>
+</div>
             <!-- ========== PDF区块结束，其余代码完全原样保留 ========== -->
             <!-- 政策有效性评估（滚动渐显） -->
             <div class="scroll-reveal">
@@ -724,5 +723,26 @@
         initAntiCopy();
     });
     </script>
+
+    <script>
+// 追加PDF弹窗控制脚本，放在页面原有script末尾即可，不覆盖原有逻辑
+document.addEventListener('DOMContentLoaded', () => {
+    const pdfBtn = document.getElementById('openPdfBtn');
+    if(pdfBtn){
+        pdfBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // 判断是否本地文件协议
+            if(window.location.protocol === 'file:'){
+                alert("当前为本地文件打开模式，浏览器禁止加载PDF，请使用Live Server等HTTP服务预览页面");
+                return;
+            }
+            // 弹窗打开PDF，移除下载工具栏
+            const pdfUrl = "assets/fed-monetary-policy-2015-2025.pdf#toolbar=0&navpanes=0";
+            window.open(pdfUrl, "_blank", "width=1000,height=700,scrollbars=yes");
+        })
+    }
+})
+</script>
+    
 </body>
 </html>
