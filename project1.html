@@ -171,7 +171,6 @@
 <body class="bg-paper text-ink antialiased dark:bg-dark-paper dark:text-dark-ink transition-colors duration-1100 ease-smooth">
     <canvas id="texture-canvas"></canvas>
     <div id="light-spot"></div>
-
         <!-- 常驻导航 -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-paper/75 dark:bg-dark-paper/75 backdrop-blur-md transition-colors duration-1100 ease-smooth">
         <div class="relative max-w-6xl mx-auto px-6 md:px-12 py-5 md:py-6 flex justify-between items-center">
@@ -187,12 +186,10 @@
             <div class="nav-divider"></div>
         </div>
     </nav>
-
     <!-- 固定返回主页按钮（位置已改为左侧） -->
     <a href="index.html" class="back-btn bg-paper/80 dark:bg-dark-paper/80 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center border border-line dark:border-dark-line hover:border-ink dark:hover:border-dark-ink transition-all duration-600">
         <span class="text-[11px] font-light">←</span>
     </a>
-
     <!-- 核心内容区（无修改） -->
     <section class="pt-32 pb-24 md:pt-40 md:pb-32 px-6 md:px-12">
         <div class="max-w-4xl mx-auto">
@@ -209,7 +206,6 @@
                     数据来源：美联储官网 | IMF | World Bank
                 </p>
             </div>
-
             <!-- 核心简介（滚动渐显） -->
             <div class="scroll-reveal mb-16 md:mb-24">
                 <p class="font-serif text-xl md:text-2xl font-light leading-relaxed mb-8 text-balance">
@@ -223,18 +219,17 @@
                     推出总额超2万亿美元的量化宽松计划，同时创设多项紧急流动性工具，成为全球央行危机应对的典型范式。
                 </p>
             </div>
-
             <!-- 图文分析区1：利率政策走势（滚动渐显） -->
             <div class="scroll-reveal mb-16 md:mb-24">
                 <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
                     <div class="w-full md:w-1/2 flex-shrink-0">
                         <div class="bg-white/40 dark:bg-white/[0.03] border border-line/60 dark:border-dark-line/60 p-4">
                             <svg viewBox="0 0 600 400" class="w-full h-60 geo-svg">
-                                <rect width="600" height="400" fill="transparent"/>
+                                <rect width="600" height="400" fill="transparent" />
                                 <!-- 坐标轴 -->
                                 <g stroke="#8c8c89" stroke-width="0.6" fill="none" class="dark:stroke-[#5f5f5c]">
-                                    <line x1="80" y1="320" x2="520" y2="320"/>
-                                    <line x1="80" y1="80" x2="80" y2="320"/>
+                                    <line x1="80" y1="320" x2="520" y2="320" />
+                                    <line x1="80" y1="80" x2="80" y2="320" />
                                     <!-- 年份刻度 -->
                                     <line x1="140" y1="320" x2="140" y2="325" />
                                     <text x="130" y="340" font-size="10" fill="#767673" class="dark:fill-[#888885]">2015</text>
@@ -257,9 +252,9 @@
                                     <text x="50" y="125" font-size="10" fill="#767673" class="dark:fill-[#888885]">4%</text>
                                     <!-- 利率曲线 -->
                                     <path d="M80,280 L140,240 L200,180 L260,160 L320,280 L380,120 L440,180 L520,220" 
-                                          stroke="#1f1f1e" stroke-width="1.2" fill="none" class="dark:stroke-[#e6e6e5]"/>
+                                          stroke="#1f1f1e" stroke-width="1.2" fill="none" class="dark:stroke-[#e6e6e5]" />
                                     <!-- 2020危机标记 -->
-                                    <circle cx="290" cy="280" r="4" fill="#1f1f1e" class="dark:fill-[#e6e6e5]"/>
+                                    <circle cx="290" cy="280" r="4" fill="#1f1f1e" class="dark:fill-[#e6e6e5]" />
                                     <text x="295" y="275" font-size="9" fill="#767673" class="dark:fill-[#888885]">2020危机</text>
                                 </g>
                             </svg>
@@ -279,7 +274,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- 图文分析区2：危机应对框架（滚动渐显） -->
             <div class="scroll-reveal mb-20 md:mb-28">
                 <h3 class="font-serif text-xl md:text-2xl font-light mb-8">2020年危机应对的三层框架</h3>
@@ -307,42 +301,42 @@
                     </div>
                 </div>
             </div>
-
-                        <!-- 原版文档展示区（防复制） -->
+            <!-- ========== 完全重写优化后的原版文档展示区 ========== -->
             <div class="scroll-reveal mb-16 md:mb-24">
                 <h3 class="font-serif text-xl md:text-2xl font-light mb-8">原版研究报告</h3>
                 <div class="hairline w-full mb-8"></div>
                 <div class="document-viewer bg-white/20 dark:bg-white/[0.02] border border-line dark:border-dark-line p-4 md:p-6 rounded-sm">
                     <p class="text-subtle dark:text-dark-subtle text-sm mb-6">
-                        以下为完整研究报告（PDF），仅支持浏览，禁止复制/下载
+                        以下为完整研究报告（PDF），仅支持页面内浏览，禁止复制、保存、打印文档
                     </p>
-                    <!-- PDF展示容器（优化兼容性） -->
-                    <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden">
-                        <!-- 替换为iframe提升兼容性，保留防复制属性 -->
+                    <!-- PDF容器，高度、样式完全沿用原设定 -->
+                    <div class="pdf-container w-full h-[80vh] border border-line/60 dark:border-dark-line/60 rounded-sm overflow-hidden relative">
+                        <!-- iframe 主流浏览器PDF兼容方案 -->
                         <iframe 
-                            src="assets/fed-monetary-policy-2015-2025.pdf"  <!-- 替换为你的PDF路径 -->
+                            src="assets/fed-monetary-policy-2015-2025.pdf#toolbar=0&navpanes=0&scrollbar=1"
                             width="100%"
                             height="100%"
-                            class="no-select"
+                            class="no-select block"
                             frameborder="0"
                             scrolling="auto"
-                            sandbox="allow-same-origin"  <!-- 限制沙箱权限，增强防复制 -->
+                            sandbox="allow-same-origin allow-scripts"
                         >
-                            <!-- 增强型错误提示 -->
-                            <div class="flex flex-col items-center justify-center h-full w-full text-subtle dark:text-dark-subtle text-sm p-8">
-                                <p class="mb-4">无法内置加载PDF文档</p>
-                                <p>请检查PDF文件路径是否正确，或使用PDF阅读器打开以下链接：</p>
-                                <a href="assets/fed-monetary-policy-2015-2025.pdf" 
-                                   class="mt-4 text-ink dark:text-dark-ink hover:underline no-select"
-                                   onclick="event.preventDefault(); alert('文档仅支持浏览，禁止下载');">
-                                    fed-monetary-policy-2015-2025.pdf
-                                </a>
+                            <!-- iframe加载失败兜底提示 -->
+                            <div class="w-full h-full flex flex-col justify-center items-center p-6 text-subtle dark:text-dark-subtle">
+                                <p class="text-base mb-3">PDF文档加载失败</p>
+                                <p class="text-sm mb-2">排查方案：</p>
+                                <p class="text-sm mb-1">1. 确认项目根目录存在 assets 文件夹</p>
+                                <p class="text-sm mb-1">2. 确认文件名为 fed-monetary-policy-2015-2025.pdf</p>
+                                <p class="text-sm mb-4">3. 本地打开文件需使用 http 服务，不能直接双击本地html</p>
+                                <span class="text-sm">如需查阅文档，请联系管理员获取资料</span>
                             </div>
                         </iframe>
+                        <!-- 顶层遮罩，彻底屏蔽右键/拖拽复制，底层iframe仅做浏览 -->
+                        <div class="absolute inset-0 z-10"></div>
                     </div>
                 </div>
             </div>
-
+            <!-- ========== PDF区块结束，其余代码完全原样保留 ========== -->
             <!-- 政策有效性评估（滚动渐显） -->
             <div class="scroll-reveal">
                 <h3 class="font-serif text-xl md:text-2xl font-light mb-8">政策有效性三维评估</h3>
@@ -373,7 +367,6 @@
             </div>
         </div>
     </section>
-
     <!-- 页脚 -->
     <footer class="py-16 md:py-20 px-6 md:px-12 border-t border-line dark:border-dark-line transition-colors duration-1100 ease-smooth">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 md:gap-10">
@@ -392,7 +385,6 @@
             </p>
         </div>
     </footer>
-
     <!-- 复用原有交互逻辑 -->
     <script>
     const MathUtils = {
@@ -403,7 +395,6 @@
             return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
         }
     };
-
     class SimplexNoise {
         constructor(seed = Math.random()) {
             this.p = new Uint8Array(256);
@@ -435,7 +426,6 @@
             this.F2 = 0.5 * (Math.sqrt(3) - 1);
             this.G2 = (3 - Math.sqrt(3)) / 6;
         }
-
         noise2D(x, y) {
             const { perm, permMod12, grad3, F2, G2 } = this;
             let n0, n1, n2;
@@ -488,7 +478,6 @@
             return 70 * (n0 + n1 + n2);
         }
     }
-
     class TextureRenderer {
         constructor(canvas) {
             this.canvas = canvas;
@@ -499,7 +488,6 @@
             this.resize();
             window.addEventListener('resize', () => this.resize());
         }
-
         resize() {
             const { innerWidth, innerHeight } = window;
             this.canvas.width = innerWidth * this.dpr;
@@ -507,7 +495,6 @@
             this.canvas.style.width = innerWidth + 'px';
             this.canvas.style.height = innerHeight + 'px';
         }
-
         render() {
             this.time += 0.0006;
             const { width, height } = this.canvas;
@@ -553,7 +540,6 @@
             
             ctx.putImageData(imageData, 0, 0);
         }
-
         start() {
             const loop = () => {
                 this.render();
@@ -561,12 +547,10 @@
             };
             this.rafId = requestAnimationFrame(loop);
         }
-
         stop() {
             if (this.rafId) cancelAnimationFrame(this.rafId);
         }
     }
-
     class LightSpotSystem {
         constructor(element) {
             this.el = element;
@@ -591,26 +575,22 @@
             document.addEventListener('mouseenter', () => this.show());
             document.addEventListener('mouseleave', () => this.hide());
         }
-
         show() {
             this.visible = true;
             this.el.style.opacity = '0.05';
             this.el.style.transition = 'opacity 1.6s ease-smooth';
         }
-
         hide() {
             this.visible = false;
             this.el.style.opacity = '0';
             this.el.style.transition = 'opacity 2.2s ease-smooth';
         }
-
         update() {
             this.currentX = MathUtils.lerp(this.currentX, this.targetX, 0.045);
             this.currentY = MathUtils.lerp(this.currentY, this.targetY, 0.045);
             this.el.style.transform = `translate(${this.currentX - 325}px, ${this.currentY - 325}px)`;
         }
     }
-
     class ScrollRevealSystem {
         constructor() {
             this.elements = document.querySelectorAll('.scroll-reveal');
@@ -621,7 +601,6 @@
                 this.windowHeight = window.innerHeight;
             });
         }
-
         update() {
             this.scrollY = window.scrollY;
             
@@ -648,18 +627,15 @@
             });
         }
     }
-
     class AnimationTimeline {
         constructor() {
             this.subscribers = [];
             this.running = false;
         }
-
         subscribe(callback) {
             this.subscribers.push(callback);
             if (!this.running) this.start();
         }
-
         start() {
             this.running = true;
             const loop = () => {
@@ -669,13 +645,11 @@
             };
             this.rafId = requestAnimationFrame(loop);
         }
-
         stop() {
             this.running = false;
             if (this.rafId) cancelAnimationFrame(this.rafId);
         }
     }
-
     class ThemeSystem {
         constructor(toggleBtn) {
             this.toggle = toggleBtn;
@@ -690,7 +664,6 @@
             
             this.toggle.addEventListener('click', () => this.toggleTheme());
         }
-
         setTheme(mode) {
             if (mode === 'dark') {
                 this.root.classList.add('dark');
@@ -698,13 +671,11 @@
                 this.root.classList.remove('dark');
             }
         }
-
         toggleTheme() {
             const isDark = this.root.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
     }
-
     // 防复制增强
     function initAntiCopy() {
         // 禁用右键
@@ -732,7 +703,6 @@
             }
         });
     }
-
     document.addEventListener('DOMContentLoaded', () => {
         const timeline = new AnimationTimeline();
         
